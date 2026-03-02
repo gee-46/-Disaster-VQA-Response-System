@@ -46,3 +46,14 @@ async def analyze_image(
         risk_level = random.choice(["Low", "Medium", "High"])
         confidence = round(random.uniform(0.75, 0.99), 2)
         
+    return {
+        "answer": answer,
+        "confidence": confidence,
+        "risk_level": risk_level,
+        "inference_time_ms": int(random.uniform(1200, 3500)),
+        "model": "Vision-Text-Fusion-v2.1"
+    }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
