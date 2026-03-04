@@ -1,0 +1,16 @@
+:root {
+    --bg-dark: #070913;
+    --navy-panel: rgba(14, 21, 41, 0.65);
+    --neon-blue: #00f0ff;
+    --neon-purple: #b026ff;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --risk-low: #10b981;
+    --risk-med: #f59e0b;
+    --risk-high: #ef4444;
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
