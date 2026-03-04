@@ -1,3 +1,4 @@
+/* Color Palette & Variables */
 :root {
     --bg-dark: #070913;
     --navy-panel: rgba(14, 21, 41, 0.65);
@@ -14,3 +15,24 @@
 }
 
 * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    position: relative;
+}
+
+/* Background Effects */
+.background-grid {
+
+
+
+
+
