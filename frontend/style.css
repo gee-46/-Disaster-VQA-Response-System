@@ -299,3 +299,101 @@ section {
     outline: none;
     transition: 0.3s;
 }
+
+.query-box textarea:focus {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.analyze-btn {
+    width: 100%;
+    margin-top: 1.5rem;
+    background: transparent;
+    border: 1px solid var(--neon-purple);
+    color: var(--neon-purple);
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    transition: 0.3s;
+}
+
+.analyze-btn:hover {
+    background: var(--neon-purple);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(176, 38, 255, 0.5);
+}
+
+.output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--risk-low);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--risk-low);
+    transition: 0.3s;
+}
+
+.loading-state {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.radar-spinner {
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(0, 240, 255, 0.2);
+    border-top-color: var(--neon-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1.5rem;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.result-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.result-card h4 {
+    color: var(--neon-blue);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.result-card p {
+    line-height: 1.6;
+}
