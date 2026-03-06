@@ -105,7 +105,7 @@ h4 {
 
 .site-logo i {
     color: var(--neon-blue);
-    }
+}
 
 .nav-links {
     list-style: none;
@@ -197,4 +197,105 @@ section {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
+}
+
+.title-line {
+    height: 3px;
+    width: 60px;
+    background: var(--neon-purple);
+    margin: 0 auto;
+    box-shadow: 0 0 10px var(--neon-purple);
+}
+
+/* Dashboard */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.upload-zone {
+    border: 2px dashed rgba(0, 240, 255, 0.3);
+    border-radius: 12px;
+    padding: 3rem 1rem;
+    text-align: center;
+    transition: 0.3s;
+    background: rgba(0, 240, 255, 0.02);
+    margin-top: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-zone.dragover {
+    background: rgba(0, 240, 255, 0.1);
+    border-color: var(--neon-blue);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: var(--neon-blue);
+    margin-bottom: 1rem;
+}
+
+.upload-zone p {
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.or {
+    display: block;
+    margin: 0.5rem 0;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.file-label {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.file-label:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#image-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 5;
+    border-radius: 10px;
+}
+
+.query-box {
+    margin-top: 2rem;
+}
+
+.query-box label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.query-box textarea {
+    width: 100%;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--text-main);
+    padding: 1rem;
+    font-family: var(--font-body);
+    resize: none;
+    outline: none;
+    transition: 0.3s;
 }
