@@ -43,16 +43,22 @@ Output → Answer + Confidence Score
 
 # ⚙️ Tech Stack
 
-## 🔹 AI / ML
+## 🔹 AI / ML Model Specifications
+
+### Active Model: `Salesforce/blip-vqa-base`
+While the initial design accounted for heavy-weight models like **LLaVA** and **Qwen-VL**, the current active implementation utilizes **BLIP (Bootstrapping Language-Image Pre-training)**. 
+
+**Why BLIP?**
+* **Hardware Efficiency:** BLIP is a highly capable VLM that requires significantly less VRAM (~1GB-2GB) compared to the massive 16GB+ requirements of LLaVA 7B. This allows the API to run smoothly on edge devices and consumer GPUs without out-of-memory (OOM) crashes.
+* **Speed:** Inference time is dramatically reduced, enabling true real-time disaster reasoning.
+
+*(See the guide below if you wish to run the full LLaVA architecture).*
+
+## 🔹 Technologies
 - PyTorch  
 - Hugging Face Transformers  
-- LLaVA / Qwen-VL  
-- DisasterVQA Dataset  
-
-## 🔹 Backend (Self-Built)
+- FastAPI (Backend API)
 - Python  
-- FastAPI  
-- Modular inference pipeline  
 
 ## 🔹 Frontend
 - AI-assisted UI (Antigravity + Gemini Pro AI)  
@@ -77,11 +83,17 @@ Output → Answer + Confidence Score
 
 # 📂 Project Structure
 
-```
+```text
 Disaster-VQA-Response-System/
 │
 ├── backend/
+│   ├── main.py (FastAPI Server)
+│   ├── ml/model_pipeline.py (VQA Inference)
+│   └── routers/
 ├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
 ├── models/
 ├── docker/
 └── README.md
@@ -97,7 +109,59 @@ The frontend interface was developed with the assistance of AI-powered tools (An
 
 ---
 
+# 🛠️ Running with LLaVA 1.5 (Advanced Setup)
 
+If you have access to a High-End GPU (e.g., RTX 3090, 4090, or A100 with 16GB+ VRAM) and wish to utilize the **LLaVA 1.5 7B** model instead of BLIP, follow these steps to modify the backend:
+
+1. **Install Quantization Libraries**  
+   To load LLaVA efficiently, assure `bitsandbytes` is installed to support 4-bit load:
+   ```bash
+   pip install bitsandbytes accelerate
+   ```
+
+2. **Modify the Pipeline Code**  
+   Open `backend/ml/model_pipeline.py` and replace the BLIP classes with LLaVA:
+   
+   ```python
+   # Replace these imports:
+   # from transformers import BlipProcessor, BlipForQuestionAnswering
+   
+   # With LLaVA imports:
+   from transformers import AutoProcessor, LlavaForConditionalGeneration
+   from transformers import BitsAndBytesConfig
+   ```
+
+3. **Update Model Initialization**  
+   Change the `__init__` and `load_model` methods:
+   ```python
+   def __init__(self, model_id="llava-hf/llava-1.5-7b-hf"):
+       # ... setup code ...
+       
+   def load_model(self):
+       self.processor = AutoProcessor.from_pretrained(self.model_id)
+       
+       bnb_config = BitsAndBytesConfig(
+           load_in_4bit=True,
+           bnb_4bit_compute_dtype=torch.float16
+       )
+       
+       self.model = LlavaForConditionalGeneration.from_pretrained(
+           self.model_id,
+           quantization_config=bnb_config,
+           low_cpu_mem_usage=True
+       )
+   ```
+
+4. **Update Inference Prompt**  
+   LLaVA requires a specific prompt template format. Update the `generate` pipeline:
+   ```python
+   prompt = f"USER: <image>\n{question}\nASSISTANT:"
+   inputs = self.processor(text=prompt, images=image, return_tensors="pt")
+   ```
+
+Restart the FastAPI server. **Note:** The initial start will download roughly 10GB of weights from Hugging Face.
+
+---
 
 # 🌍 Future Scope
 
